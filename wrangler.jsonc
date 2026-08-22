@@ -22,6 +22,11 @@
   // fetch to MACHINE_API_URL.
   "services": [{ "binding": "API", "service": "afixo-api" }],
 
+  // The documentation pages in docs/ are bundled as text modules (src/docs.ts imports them): the
+  // afixo://docs/<slug> resources and the afixo_search_docs index. Refresh them with scripts/sync-docs.sh.
+  // `fallthrough` keeps wrangler's default Text rules (*.txt, *.html, *.sql) in place after this one.
+  "rules": [{ "type": "Text", "globs": ["**/*.md"], "fallthrough": true }],
+
   // Single environment: pushes to master deploy production. No Durable Objects, no KV —
   // the MCP server is stateless (createMcpHandler), see CLAUDE.md.
   "routes": [{ "pattern": "mcp.afixo.io", "custom_domain": true }]

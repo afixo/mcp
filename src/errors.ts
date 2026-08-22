@@ -47,10 +47,13 @@ export function invalidPurpose(purpose: string, valid: readonly string[]): CallT
 
 /** Any other non-success answer: surface the status and the API's own `{error, message}`. */
 export function upstreamFailure(what: string, status: number, body: unknown): CallToolResult {
+  return toolError(`${what} failed: the Afixo API answered ${httpSummary(status, body)}.`);
+}
+
+/** `HTTP 503 upstream_unavailable — policy down`: the status plus the API's own envelope, for messages and result rows. */
+export function httpSummary(status: number, body: unknown): string {
   const { error, message } = errorFields(body);
-  const code = error ? ` ${error}` : "";
-  const detail = message ? ` — ${message}` : "";
-  return toolError(`${what} failed: the Afixo API answered HTTP ${status}${code}${detail}.`);
+  return `HTTP ${status}${error ? ` ${error}` : ""}${message ? ` — ${message}` : ""}`;
 }
 
 export function unreachable(what: string): CallToolResult {
