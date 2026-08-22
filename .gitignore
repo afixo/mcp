@@ -1,0 +1,23 @@
+# build output
+dist/
+
+# dependencies
+node_modules/
+
+# wrangler state, local vars (`worker-configuration.d.ts` at the root IS committed)
+.wrangler/
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+
+# environment variables
+.env
+.env.*
+!.env.example
+
+# logs
+*.log
+
+# editors / OS
+.DS_Store
+.idea/

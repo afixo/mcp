@@ -1,0 +1,11 @@
+# Copy to .dev.vars (gitignored). `wrangler dev` loads it. This Worker has no secrets.
+
+# Base URL of the Afixo machine API. In production it is https://api.afixo.io (wrangler.jsonc) and
+# requests travel over the `API` service binding to afixo-api. A loopback URL means "the gateway on
+# this machine": the Worker fetches it directly and ignores the binding, which under `wrangler dev`
+# exists but is "[not connected]". Start the gateway from afixo-services (`make dev`, machine
+# listener on :8081).
+MACHINE_API_URL=http://localhost:8081
+
+# To go through a local afixo-api instead (wrangler dev -c wrangler.jsonc -c ../afixo-api/wrangler.jsonc),
+# use a hostname from afixo-api's local MACHINE_HOSTS, e.g. MACHINE_API_URL=http://api.localhost

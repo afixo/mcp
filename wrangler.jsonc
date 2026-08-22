@@ -1,0 +1,28 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "afixo-mcp",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-22",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Served on its custom domain only — no workers.dev URL, no preview URLs.
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": { "enabled": true },
+
+  // The machine API's public base URL. It is the hostname of every upstream request, and that
+  // hostname is what selects *machine mode* inside afixo-api (its MACHINE_HOSTS). Locally
+  // (.dev.vars) it points at the gateway's machine listener, http://localhost:8081.
+  "vars": {
+    "MACHINE_API_URL": "https://api.afixo.io"
+  },
+
+  // Every upstream call goes to afixo-api over this binding (src/upstream.ts). Deploy afixo-api
+  // first on a fresh account. Without the binding (local dev) the Worker falls back to a plain
+  // fetch to MACHINE_API_URL.
+  "services": [{ "binding": "API", "service": "afixo-api" }],
+
+  // Single environment: pushes to master deploy production. No Durable Objects, no KV —
+  // the MCP server is stateless (createMcpHandler), see CLAUDE.md.
+  "routes": [{ "pattern": "mcp.afixo.io", "custom_domain": true }]
+}
