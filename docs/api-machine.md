@@ -9,12 +9,6 @@ Base URL **`https://api.afixo.io`**. Exactly four routes exist on this host, plu
 `/api/*` included — is `404 {"error":"not_found"}` from the edge Worker, before the
 request reaches the cluster.
 
-> **Status: skeleton (2026-08-22)**
->
-> `GET /v1/health` and `GET /v1/purposes` work end to end. `POST /oauth/token` and
-> `GET /v1/disclose/…` are routed by the gateway to the `auth` and `disclosure`
-> services, which are skeletons answering `501 not_implemented`.
-
 ## `GET /v1/health`
 
 No authentication. Liveness of the gateway.

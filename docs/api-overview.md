@@ -50,7 +50,7 @@ The gateway maps gRPC status from the services to HTTP:
 | NOT_FOUND | 404 | `not_found` |
 | ALREADY_EXISTS, FAILED_PRECONDITION | 409 | |
 | RESOURCE_EXHAUSTED | 429 | |
-| UNIMPLEMENTED | 501 | `not_implemented` — skeleton services |
+| UNIMPLEMENTED | 501 | `not_implemented` — reserved; no deployed RPC answers it |
 | UNAVAILABLE, DEADLINE_EXCEEDED | 503 | `upstream_unavailable` — also when the audit service is down and a disclosure fails closed |
 | anything else | 500 | `internal` |
 

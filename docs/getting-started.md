@@ -8,14 +8,6 @@ Afixo answers one question for an API client: *which version of this person may 
 see, for this stated reason?* This page takes an integrator from zero to a
 disclosure decision.
 
-> **Status: skeleton (2026-08-22)**
->
-> The `auth`, `identity`, `disclosure` and `audit` services are skeletons that answer
-> `501 not_implemented`; `policy`, the gateway and the decision engine are complete.
-> Today `GET /v1/health` and `GET /v1/purposes` work end to end. Sign-in,
-> `POST /oauth/token` and `GET /v1/disclose/…` follow the contract below but do not
-> yet return real decisions.
-
 1. **Sign in at [afixo.io](https://afixo.io).** Subjects authenticate with GitHub.
    The browser never holds a token: the session is a sealed cookie set by the edge
    (see [the session boundary](https://docs.afixo.io/architecture/session-boundary/)).
